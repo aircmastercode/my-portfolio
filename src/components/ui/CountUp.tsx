@@ -6,46 +6,56 @@ import { useEffect, useRef, useState } from "react";
 // (e.g. "1st", "40+", "58%") by extracting the number and re-wrapping it.
 export default function CountUp({ value, className = "" }: { value: string; className?: string }) {
   const match = value.match(/^(\D*)(\d+(?:\.\d+)?)(\D*)$/);
+  const hasNumber = match !== null;
   const prefix = match?.[1] ?? "";
-  const target = match ? parseFloat(match[2]) : 0;
+  const numStr = match?.[2] ?? "";
+  const target = hasNumber ? parseFloat(numStr) : 0;
   const suffix = match?.[3] ?? "";
-  const decimals = match?.[2].includes(".") ? 1 : 0;
+  const decimals = numStr.includes(".") ? 1 : 0;
 
-  const [display, setDisplay] = useState(match ? 0 : null);
+  const [display, setDisplay] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
 
+  // Depend only on stable primitives (`hasNumber`, `target`) — NOT the `match`
+  // array, which is a fresh reference every render and would otherwise make this
+  // effect tear down + recreate the observer/rAF/guard on every animation frame,
+  // leaving the counter stuck at a tiny value.
   useEffect(() => {
-    if (!match) return;
+    if (!hasNumber) return;
     const el = ref.current;
     if (!el) return;
+
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setDisplay(target);
       return;
     }
-    let done = false;
-    const finish = () => {
-      done = true;
-      setDisplay(target);
-    };
-    const animate = () => {
+
+    let raf = 0;
+    let started = false;
+
+    const run = () => {
+      if (started) return;
+      started = true;
       const dur = 1400;
       const start = performance.now();
       const tick = (now: number) => {
-        if (done) return;
         const t = Math.min((now - start) / dur, 1);
         const eased = 1 - Math.pow(1 - t, 3);
-        setDisplay(eased * target);
-        if (t < 1) requestAnimationFrame(tick);
-        else done = true;
+        if (t < 1) {
+          setDisplay(eased * target);
+          raf = requestAnimationFrame(tick);
+        } else {
+          setDisplay(target);
+        }
       };
-      requestAnimationFrame(tick);
+      raf = requestAnimationFrame(tick);
     };
 
     const io = new IntersectionObserver(
       (entries) => {
         if (!entries[0].isIntersecting) return;
         io.disconnect();
-        animate();
+        run();
       },
       { threshold: 0.25 }
     );
@@ -53,19 +63,25 @@ export default function CountUp({ value, className = "" }: { value: string; clas
 
     // Bulletproof: whatever happens with scroll/observer/rAF, show the real
     // value within 2.2s so stats never appear stuck or "not loading".
-    const guard = setTimeout(finish, 2200);
+    const guard = setTimeout(() => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+      setDisplay(target);
+    }, 2200);
+
     return () => {
       io.disconnect();
+      cancelAnimationFrame(raf);
       clearTimeout(guard);
     };
-  }, [match, target]);
+  }, [hasNumber, target]);
 
-  if (!match) return <span className={className}>{value}</span>;
+  if (!hasNumber) return <span className={className}>{value}</span>;
 
   return (
     <span ref={ref} className={`tabular-nums ${className}`}>
       {prefix}
-      {display !== null ? display.toFixed(decimals) : "0"}
+      {display.toFixed(decimals)}
       {suffix}
     </span>
   );
