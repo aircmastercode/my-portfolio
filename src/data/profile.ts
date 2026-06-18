@@ -5,7 +5,7 @@ export const profile = {
   name: "Tanush Singhal",
   initials: "TS",
   roleLine: "Backend & AI Engineer",
-  tagline: "I build products, then I measure whether they actually worked.",
+  tagline: "Build products, then prove they worked — with real numbers.",
   triple: ["Builder", "Measurer", "Finisher"],
   location: "Ghaziabad, India",
   availability: "Open to SDE / AI engineering internships · willing to relocate",
@@ -19,19 +19,19 @@ export const profile = {
     medium: "https://medium.com/@tanushsinghal22082004",
   },
   intro:
-    "Computer Science undergraduate and backend-leaning software engineer who delivers end-to-end. Two engineering internships (USA + Indian Railways) building scalable services on AWS and PostgreSQL, plus a 1st-place hackathon win out of 50+ teams. I care about shipping production-quality, tested code — and then proving it worked with real numbers.",
+    "Computer Science undergraduate and backend-leaning software engineer who delivers end-to-end. Two engineering internships (USA + Indian Railways) building scalable services on AWS and PostgreSQL, plus a 1st-place hackathon win out of 50+ teams. The focus: production-quality, tested code — then proof it worked with real numbers.",
 
   about: {
-    headline: "I close the loop between building and measuring.",
+    headline: "Closing the loop between building and measuring.",
     paragraphs: [
-      "I'm a builder who finishes. In every project my favourite part is the decisions — what to build, what to cut, and how to measure whether it actually moved the needle. Engineering is my unfair advantage, but instrumentation is what I'm known for.",
-      "Across two internships and a hackathon win, I've shipped event-driven services, 40+ REST APIs, a serverless voice assistant, and a published benchmark study. I don't just claim impact — I instrument it, defend the number, and write about the trade-offs in public.",
-      "I'm currently a remote Software Engineering Intern at Software Tree (USA), building a 24/7 inventory-monitoring agent on a JSON-RPC backend, while studying CS at BITS Pilani and Data Science at IIT Madras simultaneously.",
+      "A builder who finishes. In every project, the interesting part is the decisions — what to build, what to cut, and how to measure whether it moved the needle. Engineering is the unfair advantage; instrumentation is what stands out.",
+      "Across two internships and a hackathon win: event-driven services, 40+ REST APIs, a serverless voice assistant, and a published benchmark study. Impact isn't claimed — it's instrumented, defended with numbers, and written about in public.",
+      "Currently a remote Software Engineering Intern at Software Tree (USA), building a 24/7 inventory-monitoring agent on a JSON-RPC backend, while studying CS at BITS Pilani and Data Science at IIT Madras simultaneously.",
     ],
     funFacts: [
       "Published a 33-minute benchmark essay on the hidden cost of AI database access.",
-      "Audited my own railway system like a stranger would — and found my proudest feature was the biggest bottleneck.",
-      "Removed the LLM from my own agent's loop after measuring that arithmetic beat aesthetics.",
+      "Audited the railway system like a stranger would — the proudest feature turned out to be the biggest bottleneck.",
+      "Removed the LLM from the monitoring loop after measuring that arithmetic beat aesthetics.",
     ],
   },
 
@@ -101,7 +101,7 @@ export const profile = {
       badge: "Production · Software Tree",
       period: "Oct 2025 — Present",
       summary:
-        "A 24/7 agent that detects low-stock SKUs, computes reorder quantity, and emails HTML alerts to admins and suppliers — with no spec given, so I defined the success metrics myself.",
+        "A 24/7 agent that detects low-stock SKUs, computes reorder quantity, and emails HTML alerts to admins and suppliers — with no spec given, so the success metrics were defined from scratch.",
       stack: ["Python", "LangGraph", "ReAct", "PostgreSQL", "JSON-RPC"],
       bullets: [
         "Defined the success metrics (alert threshold, monitoring interval, delivery reliability) with no brief.",
@@ -118,12 +118,12 @@ export const profile = {
       badge: "CRIS · Indian Railways",
       period: "May 2025 — Jul 2025",
       summary:
-        "Replaced a paper-based, 30–45-minute booking process with a full-stack system — then capacity-planned it for the real 7,000+ station network and audited my own design for scale.",
+        "Replaced a paper-based, 30–45-minute booking process with a full-stack system — then capacity-planned it for the real 7,000+ station network and audited the design for scale.",
       stack: ["React 18", "Express", "Sequelize", "SQLite", "JWT", "Docker"],
       bullets: [
         "Built end-to-end: 40+ REST endpoints, 5-table schema, OTP login with 3-provider fallback, QR-based public tracking with safe field projection.",
         "Capacity-planned for 7,000+ stations / 1.2M tons/yr (~100 event-writes/sec peak).",
-        "Found that my proudest feature — broadcasting every update to every station — would be the biggest bottleneck (~3B rows/day); redesigned it as an append-only event log with targeted routing.",
+        "Found the proudest feature — broadcasting every update to every station — would be the biggest bottleneck (~3B rows/day); redesigned it as an append-only event log with targeted routing.",
       ],
       principle:
         "Ask what breaks at 100× before shipping — and audit your own work like a stranger would.",
@@ -195,7 +195,7 @@ export const profile = {
     },
     {
       title: "Building an AI-Powered Inventory Watchdog",
-      blurb: "Why I removed the LLM from my own agent's loop — a decision rubric.",
+      blurb: "Why the LLM left the monitoring loop — a decision rubric.",
       tag: "Architecture · Nov 2025",
       href: "https://medium.com/@tanushsinghal22082004",
     },
@@ -218,17 +218,17 @@ export const profile = {
   // The "how I think" statement + decision principles (classic editorial pull-quotes).
   approach: {
     manifesto:
-      "I turn ambiguous problems into shipped systems — across logistics, fintech, and AI.",
+      "Ambiguous problems become shipped systems — across logistics, fintech, and AI.",
     statement:
-      "I treat engineering as a series of decisions, not a pile of features. I build the smallest honest version, measure whether it actually worked, and let the number — not the aesthetics — make the call.",
+      "Engineering is a series of decisions, not a pile of features. Build the smallest honest version, measure whether it worked, and let the number — not the aesthetics — make the call.",
     principles: [
       {
         quote: "Rules where you need vigilance, AI where you need judgment.",
-        context: "On removing the LLM from my own agent's monitoring loop.",
+        context: "On removing the LLM from the monitoring loop.",
       },
       {
         quote: "Ask what breaks at 100× before shipping — and audit your own work like a stranger would.",
-        context: "On finding my proudest feature was my system's biggest bottleneck.",
+        context: "On finding the proudest feature was the system's biggest bottleneck.",
       },
       {
         quote: "The right unit is cost per convinced customer, not cost per minute.",

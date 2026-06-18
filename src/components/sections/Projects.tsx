@@ -30,7 +30,7 @@ export default function Projects() {
       <SectionHeading
         index="04"
         title="Selected work"
-        subtitle="Each one ends with a decision principle — because the decision is the part I care about most."
+        subtitle="Each one ends with a decision principle — because the decision is what matters most."
       />
 
       <div className="grid gap-5 sm:grid-cols-2">

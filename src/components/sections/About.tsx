@@ -31,7 +31,7 @@ export default function About() {
         <Reveal delay={120}>
           <div className="rounded-3xl border border-line bg-bg-elev/40 p-6">
             <p className="font-mono text-xs uppercase tracking-widest text-[var(--accent-2)]">
-              Things I&apos;m known for
+              Things known for
             </p>
             <ul className="mt-5 space-y-5">
               {profile.about.funFacts.map((f, i) => (

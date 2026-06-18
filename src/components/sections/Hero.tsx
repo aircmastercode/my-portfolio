@@ -53,8 +53,8 @@ export default function Hero() {
         <div className={`word-mask mt-7 ${reveal ? "is-in" : ""}`} style={{ transitionDelay: "0.2s" }}>
           <span>
             <p className="max-w-xl text-lg leading-relaxed text-muted">
-              {profile.roleLine} who builds products, then measures whether they{" "}
-              <span className="font-italic-accent text-fg">actually worked.</span>
+              {profile.tagline.replace(" — with real numbers.", "")}{" "}
+              <span className="font-italic-accent text-fg">with real numbers.</span>
             </p>
           </span>
         </div>

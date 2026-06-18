@@ -1,7 +1,5 @@
 // Curated theme presets the visitor can switch between live.
-// The DEFAULT is an unbiased, near-monochrome "ink & paper" look that adapts to
-// the visitor's own system light/dark preference — so it imposes no color bias.
-// The picker lets any visitor choose a colored accent if they prefer.
+// Default is always dark ("aurora") on first visit; saved choice wins on return.
 
 export type ThemeVars = {
   "--bg": string;
@@ -177,9 +175,7 @@ export function getInitialThemeId(): string {
   if (typeof window === "undefined") return DEFAULT_THEME_ID;
   const stored = localStorage.getItem("theme-preset");
   if (stored && THEMES.some((t) => t.id === stored)) return stored;
-  // Follow the visitor's OS light/dark preference for the default.
-  const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
-  return prefersLight ? "light-clean" : "aurora";
+  return DEFAULT_THEME_ID;
 }
 
 export function applyTheme(id: string) {

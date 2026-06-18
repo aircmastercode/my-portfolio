@@ -5,15 +5,15 @@ import SectionHeading from "@/components/ui/SectionHeading";
 export default function Approach() {
   return (
     <section id="approach" className="mx-auto max-w-6xl px-6 py-32">
-      <SectionHeading index="02" title="How I think" />
+      <SectionHeading index="02" title="How the work gets done" />
 
       <Reveal>
         <p className="max-w-4xl text-balance font-display text-3xl font-light leading-[1.25] tracking-tight sm:text-[2.6rem]">
-          I treat engineering as a series of{" "}
-          <span className="font-italic-accent text-gradient">decisions</span>, not a pile of
-          features. I build the smallest honest version, measure whether it actually worked, and let
-          the <span className="font-italic-accent text-fg">number</span> — not the aesthetics —
-          make the call.
+          Engineering is a series of{" "}
+          <span className="font-italic-accent text-gradient">decisions</span>, not a pile of features.
+          Build the smallest honest version, measure whether it worked, and let the{" "}
+          <span className="font-italic-accent text-fg">number</span> — not the aesthetics — make the
+          call.
         </p>
       </Reveal>
 
