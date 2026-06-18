@@ -7,7 +7,7 @@ export default function Writing() {
     <section id="writing" className="mx-auto max-w-6xl px-6 py-28">
       <SectionHeading
         index="06"
-        title="Writing on the trade-offs"
+        title="I write about the trade-offs"
         subtitle="Long-form engineering essays, with companion video and podcast walkthroughs."
       />
       <div className="grid gap-5 sm:grid-cols-2">

@@ -7,7 +7,7 @@ export default function Experience() {
     <section id="experience" className="mx-auto max-w-6xl px-6 py-28">
       <SectionHeading
         index="03"
-        title="Where it's shipped"
+        title="Where I've shipped"
         subtitle="Two internships building real, tested software — in the USA and for Indian Railways."
       />
 

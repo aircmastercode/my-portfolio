@@ -5,7 +5,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 export default function Approach() {
   return (
     <section id="approach" className="mx-auto max-w-6xl px-6 py-32">
-      <SectionHeading index="02" title="How the work gets done" />
+      <SectionHeading index="02" title="How I think" />
 
       <Reveal>
         <p className="max-w-4xl text-balance font-display text-3xl font-light leading-[1.25] tracking-tight sm:text-[2.6rem]">
