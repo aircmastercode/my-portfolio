@@ -60,17 +60,14 @@ body {
   transition: background 0.6s ease, color 0.6s ease;
 }
 
-/* Cinematic depth: faint warm halo at top, vignette at edges (neutral, no color) */
+/* Cinematic depth: edge vignette only — no bright top halos */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background:
-    radial-gradient(75% 45% at 50% -5%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 70%),
-    radial-gradient(60% 45% at 85% 15%, color-mix(in srgb, var(--accent-2) 5%, transparent), transparent 70%),
-    radial-gradient(130% 90% at 50% 110%, transparent 55%, rgba(0, 0, 0, 0.45));
+  background: radial-gradient(130% 90% at 50% 110%, transparent 55%, rgba(0, 0, 0, 0.45));
 }
 
 /* Film grain overlay for analog richness */

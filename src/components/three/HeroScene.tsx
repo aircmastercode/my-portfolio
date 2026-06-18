@@ -2,7 +2,7 @@
 
 import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Float, Sparkles, Environment, MeshDistortMaterial } from "@react-three/drei";
+import { Float, MeshDistortMaterial } from "@react-three/drei";
 import * as THREE from "three";
 
 type Colors = { accent: string; accent2: string };
@@ -25,10 +25,6 @@ function CoreObject({ colors }: { colors: Colors }) {
   return (
     <Float speed={1.4} rotationIntensity={0.4} floatIntensity={1.0}>
       <group ref={group} position={[baseX, baseY, 0]}>
-        <mesh scale={3.2} position={[0, 0, -0.5]}>
-          <sphereGeometry args={[1, 32, 32]} />
-          <meshBasicMaterial color={colors.accent} transparent opacity={0.16} blending={THREE.AdditiveBlending} depthWrite={false} />
-        </mesh>
         <mesh scale={1.85}>
           <icosahedronGeometry args={[1, 12]} />
           <MeshDistortMaterial
@@ -104,16 +100,15 @@ export default function HeroScene() {
       dpr={dpr}
       camera={{ position: [0, 0, 6], fov: 42 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+      className="bg-transparent"
+      style={{ background: "transparent" }}
     >
       <fog attach="fog" args={["#0b0a09", 9, 18]} />
-      <ambientLight intensity={0.55} />
-      <pointLight position={[5, 5, 5]} intensity={3} color={colors.accent2} />
-      <pointLight position={[-5, -3, 2]} intensity={2.2} color={colors.accent} />
-      <pointLight position={[0, 2, 4]} intensity={1.3} color="#ffffff" />
+      <ambientLight intensity={0.35} />
+      <pointLight position={[5, 5, 5]} intensity={2.2} color={colors.accent2} />
+      <pointLight position={[-5, -3, 2]} intensity={1.6} color={colors.accent} />
       <CoreObject colors={colors} />
       <Dust />
-      <Sparkles count={60} scale={9} size={2} speed={0.3} color={colors.accent} opacity={0.5} />
-      <Environment preset="city" />
     </Canvas>
   );
 }

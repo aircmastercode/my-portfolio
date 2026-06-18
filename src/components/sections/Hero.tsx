@@ -1,22 +1,15 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { profile } from "@/data/profile";
 import { scrollToSection } from "@/lib/agent-actions";
 import Magnetic from "@/components/ui/Magnetic";
 import CountUp from "@/components/ui/CountUp";
 
-const HeroScene = dynamic(() => import("@/components/three/HeroScene"), { ssr: false });
-
 export default function Hero() {
-  const [show3d, setShow3d] = useState(false);
   const [reveal, setReveal] = useState(false);
 
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!reduce) setShow3d(true);
-
     const trigger = () => setReveal(true);
     if (sessionStorage.getItem("intro-seen")) {
       const t = setTimeout(trigger, 150);
@@ -34,30 +27,6 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative min-h-[100svh] w-full overflow-hidden">
-      {/* Persistent ambient glow (always visible, complements the 3D) */}
-      <div
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(42% 42% at 78% 32%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 72%), radial-gradient(30% 30% at 60% 22%, color-mix(in srgb, var(--accent-2) 7%, transparent), transparent 72%)",
-        }}
-      />
-      <div className="absolute inset-0 -z-0">
-        {show3d ? (
-          <HeroScene />
-        ) : (
-          <div
-            className="h-full w-full"
-            style={{
-              background:
-                "radial-gradient(60% 50% at 70% 40%, color-mix(in srgb, var(--accent) 24%, transparent), transparent 70%)",
-            }}
-          />
-        )}
-      </div>
-
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-1/2 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/60 to-transparent" />
-
       <div className="relative z-[2] mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-center px-6 pb-24 pt-28">
         <div className={`word-mask ${reveal ? "is-in" : ""}`}>
           <span>
