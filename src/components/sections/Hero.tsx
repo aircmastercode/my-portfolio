@@ -5,6 +5,7 @@ import { profile } from "@/data/profile";
 import { scrollToSection } from "@/lib/agent-actions";
 import Magnetic from "@/components/ui/Magnetic";
 import CountUp from "@/components/ui/CountUp";
+import VisitorCounter from "@/components/ui/VisitorCounter";
 
 export default function Hero() {
   const [reveal, setReveal] = useState(false);
@@ -103,6 +104,7 @@ export default function Hero() {
                   <div className="mt-1 text-[11px] leading-tight text-muted">{s.label}</div>
                 </div>
               ))}
+              <VisitorCounter variant="hero" />
             </div>
           </span>
         </div>

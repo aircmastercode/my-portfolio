@@ -51,6 +51,19 @@ Create a free event at [cal.com](https://cal.com) and set:
 NEXT_PUBLIC_CAL_LINK=yourname/30min
 ```
 
+### Profile viewer counter (optional)
+
+Shows a live count of unique portfolio visitors in the hero and footer. Requires a
+free **Vercel KV** or **Upstash Redis** database (persists across serverless cold starts).
+
+**Vercel (recommended):** Project → Storage → Create Database → KV → Connect to project.
+Vercel auto-injects `KV_REST_API_URL` and `KV_REST_API_TOKEN`.
+
+**Upstash:** Create a Redis database at [upstash.com](https://upstash.com) and set
+`UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` in `.env.local` / Vercel env vars.
+
+Without these keys the counter stays hidden — everything else works normally.
+
 ---
 
 ## How it works
@@ -83,7 +96,8 @@ src/
 │  ├─ globals.css           # design tokens, motion, theme
 │  └─ api/
 │     ├─ chat/route.ts      # Claude proxy + guardrails + tool-use
-│     └─ tts/route.ts       # premium voice (ElevenLabs) w/ fallback
+│     ├─ tts/route.ts       # premium voice (ElevenLabs) w/ fallback
+│     └─ visitors/route.ts  # unique visitor + page-view counter (KV/Redis)
 ├─ components/
 │  ├─ layout/               # SmoothScroll, Navbar, Footer, CustomCursor
 │  ├─ three/HeroScene.tsx   # R3F immersive 3D hero

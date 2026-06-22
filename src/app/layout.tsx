@@ -58,6 +58,25 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  jobTitle: profile.roleLine,
+  description: profile.intro,
+  url,
+  email: profile.email,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: profile.location,
+  },
+  alumniOf: profile.education.map((e) => ({
+    "@type": "CollegeOrUniversity",
+    name: e.school,
+  })),
+  sameAs: [profile.socials.linkedin, profile.socials.github, profile.socials.medium],
+};
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
@@ -66,7 +85,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       className={`${sans.variable} ${mono.variable} ${display.variable} ${serif.variable}`}
       suppressHydrationWarning
     >
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { getCalApi } from "@calcom/embed-react";
 import { profile } from "@/data/profile";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -8,6 +8,19 @@ import Reveal from "@/components/ui/Reveal";
 import { downloadResume } from "@/lib/agent-actions";
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
+
+  const copyPortfolioLink = useCallback(async () => {
+    const url = window.location.href;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.prompt("Copy this link:", url);
+    }
+  }, []);
+
   const openBooking = useCallback(async () => {
     try {
       const cal = await getCalApi();
@@ -66,6 +79,13 @@ export default function Contact() {
               className="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3 text-sm font-semibold transition-colors hover:border-[var(--accent)]"
             >
               Download résumé
+            </button>
+            <button
+              onClick={copyPortfolioLink}
+              data-hover
+              className="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3 text-sm font-semibold transition-colors hover:border-[var(--accent)]"
+            >
+              {copied ? "Link copied" : "Share portfolio"}
             </button>
           </div>
 
