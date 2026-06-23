@@ -20,6 +20,7 @@ type TooltipState = {
   day: ActivityDay;
   x: number;
   y: number;
+  below: boolean;
 } | null;
 
 function maskClass(mask: number, level: number): string {
@@ -70,7 +71,7 @@ function monthTicks(days: ActivityDay[]): { label: string; weekIndex: number }[]
 }
 
 export default function ActivityGrid({ data }: Props) {
-  const gridRef = useRef<HTMLDivElement>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
   const [tooltip, setTooltip] = useState<TooltipState>(null);
 
   const weeks = useMemo(() => buildWeeks(data.days), [data.days]);
@@ -78,19 +79,24 @@ export default function ActivityGrid({ data }: Props) {
 
   const showTooltip = (day: ActivityDay, el: HTMLElement) => {
     if (!day.date) return;
-    const grid = gridRef.current;
-    if (!grid) return;
-    const gridRect = grid.getBoundingClientRect();
+    const wrap = wrapRef.current;
+    if (!wrap) return;
+    const wrapRect = wrap.getBoundingClientRect();
     const cellRect = el.getBoundingClientRect();
+    // Flip below the cell when there isn't enough room above it inside the card.
+    const below = cellRect.top - wrapRect.top < 88;
     setTooltip({
       day,
-      x: cellRect.left - gridRect.left + cellRect.width / 2,
-      y: cellRect.top - gridRect.top - 8,
+      x: cellRect.left - wrapRect.left + cellRect.width / 2,
+      y: below
+        ? cellRect.bottom - wrapRect.top + 8
+        : cellRect.top - wrapRect.top - 8,
+      below,
     });
   };
 
   return (
-    <div className="relative">
+    <div ref={wrapRef} className="relative">
       <div className="mb-3 flex flex-wrap items-center gap-4 text-xs text-muted">
         <LegendSwatch mask={1} label="GitHub" />
         <LegendSwatch mask={2} label="LeetCode" />
@@ -102,7 +108,7 @@ export default function ActivityGrid({ data }: Props) {
         </span>
       </div>
 
-      <div ref={gridRef} className="activity-grid-wrap relative overflow-x-auto pb-2">
+      <div className="activity-grid-wrap relative overflow-x-auto pb-2">
         <div className="inline-flex min-w-full flex-col gap-1">
           <div className="relative h-4">
             {ticks.map((t) => (
@@ -152,29 +158,31 @@ export default function ActivityGrid({ data }: Props) {
             </div>
           </div>
         </div>
-
-        {tooltip && (
-          <div
-            className="activity-tooltip pointer-events-none absolute z-20"
-            style={{
-              left: tooltip.x,
-              top: tooltip.y,
-              transform: "translate(-50%, -100%)",
-            }}
-          >
-            <p className="font-mono text-[11px] text-[var(--accent)]">
-              {formatDayLabel(tooltip.day.date)}
-            </p>
-            <ul className="mt-1.5 space-y-1">
-              {describeDay(tooltip.day).map((line) => (
-                <li key={line} className="text-xs text-fg/90">
-                  {line}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
+
+      {tooltip && (
+        <div
+          className="activity-tooltip pointer-events-none absolute z-20"
+          style={{
+            left: tooltip.x,
+            top: tooltip.y,
+            transform: tooltip.below
+              ? "translate(-50%, 0)"
+              : "translate(-50%, -100%)",
+          }}
+        >
+          <p className="font-mono text-[11px] text-[var(--accent)]">
+            {formatDayLabel(tooltip.day.date)}
+          </p>
+          <ul className="mt-1.5 space-y-1">
+            {describeDay(tooltip.day).map((line) => (
+              <li key={line} className="text-xs text-fg/90">
+                {line}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
