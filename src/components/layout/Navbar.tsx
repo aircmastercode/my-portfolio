@@ -18,27 +18,26 @@ const LINKS: { id: string; label: string }[] = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [theme, setThemeState] = useState<"dark" | "light">("dark");
   const [open, setOpen] = useState(false);
+  const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    const stored = (localStorage.getItem("theme") as "dark" | "light") || "dark";
-    setThemeState(stored);
-    document.documentElement.setAttribute("data-theme", stored);
-    const onThemeEvt = (e: Event) => setThemeState((e as CustomEvent).detail);
-    window.addEventListener("agent:theme", onThemeEvt);
+
+    // Sync icon with current mode (including on initial load from ThemeInit).
+    const stored = localStorage.getItem("theme");
+    setIsDark(stored !== "light");
+    const onTheme = (e: Event) =>
+      setIsDark((e as CustomEvent<"dark" | "light">).detail === "dark");
+    window.addEventListener("agent:theme", onTheme);
+
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("agent:theme", onThemeEvt);
+      window.removeEventListener("agent:theme", onTheme);
     };
   }, []);
-
-  const toggleTheme = () => {
-    toggleMode();
-  };
 
   const go = (id: string) => {
     scrollToSection(id);
@@ -81,12 +80,12 @@ export default function Navbar() {
 
         <div className="flex items-center gap-2">
           <button
-            onClick={toggleTheme}
+            onClick={() => { toggleMode(); setIsDark((d) => !d); }}
             data-hover
             aria-label="Toggle theme"
             className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-muted transition-colors hover:text-fg"
           >
-            {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+            {isDark ? <SunIcon /> : <MoonIcon />}
           </button>
           <button
             onClick={() => window.dispatchEvent(new CustomEvent("agent:open"))}
@@ -130,6 +129,7 @@ function SunIcon() {
     </svg>
   );
 }
+
 function MoonIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">

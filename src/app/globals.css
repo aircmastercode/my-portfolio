@@ -16,16 +16,16 @@
 }
 
 :root[data-theme="light"] {
-  --bg: #f7f7f5;
+  --bg: #f4f3f0;
   --bg-elev: #ffffff;
-  --fg: #111113;
-  --muted: #6b6b72;
-  --line: rgba(17, 17, 19, 0.12);
-  --accent: #18181b;
-  --accent-2: #3f3f46;
-  --accent-warm: #27272a;
-  --accent-contrast: #fafafa;
-  --glow: rgba(17, 17, 19, 0.12);
+  --fg: #0e0d0c;
+  --muted: #4a4740;
+  --line: rgba(14, 13, 12, 0.14);
+  --accent: #0e0d0c;
+  --accent-2: #3a3730;
+  --accent-warm: #28251f;
+  --accent-contrast: #f4f3f0;
+  --glow: rgba(14, 13, 12, 0.1);
 }
 
 @theme inline {

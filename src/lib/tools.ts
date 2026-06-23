@@ -46,17 +46,6 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
     description: "Trigger a download of Tanush's resume PDF.",
     input_schema: { type: "object", properties: {} },
   },
-  {
-    name: "set_theme",
-    description: "Switch the website appearance between dark and light.",
-    input_schema: {
-      type: "object",
-      properties: {
-        theme: { type: "string", enum: ["dark", "light"] },
-      },
-      required: ["theme"],
-    },
-  },
 ];
 
 export type ToolCall = {

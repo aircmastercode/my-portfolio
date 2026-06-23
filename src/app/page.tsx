@@ -2,7 +2,7 @@ import SmoothScroll from "@/components/layout/SmoothScroll";
 import CustomCursor from "@/components/layout/CustomCursor";
 import Preloader from "@/components/layout/Preloader";
 import ScrollProgress from "@/components/layout/ScrollProgress";
-import ThemePicker from "@/components/layout/ThemePicker";
+import ThemeInit from "@/components/layout/ThemeInit";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
@@ -24,7 +24,7 @@ export default function Home() {
     <SmoothScroll>
       <Preloader />
       <ScrollProgress />
-      <ThemePicker />
+      <ThemeInit />
       <CustomCursor />
       <Navbar />
       <main>

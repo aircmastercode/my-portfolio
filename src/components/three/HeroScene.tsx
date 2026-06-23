@@ -72,17 +72,17 @@ function Dust() {
 }
 
 function readAccents(): Colors {
-  if (typeof window === "undefined") return { accent: "#3b82f6", accent2: "#38bdf8" };
+  if (typeof window === "undefined") return { accent: "#e9e2d4", accent2: "#cdbfa6" };
   const s = getComputedStyle(document.documentElement);
   return {
-    accent: s.getPropertyValue("--accent").trim() || "#3b82f6",
-    accent2: s.getPropertyValue("--accent-2").trim() || "#38bdf8",
+    accent: s.getPropertyValue("--accent").trim() || "#e9e2d4",
+    accent2: s.getPropertyValue("--accent-2").trim() || "#cdbfa6",
   };
 }
 
 export default function HeroScene() {
   const [dpr, setDpr] = useState(1);
-  const [colors, setColors] = useState<Colors>({ accent: "#3b82f6", accent2: "#38bdf8" });
+  const [colors, setColors] = useState<Colors>({ accent: "#e9e2d4", accent2: "#cdbfa6" });
 
   useEffect(() => {
     setDpr(Math.min(window.devicePixelRatio, 2));

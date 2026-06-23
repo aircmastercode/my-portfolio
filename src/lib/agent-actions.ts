@@ -1,7 +1,6 @@
 // Client-side execution of the AI agent's tool calls — the agent's "hands".
 // Decoupled via window events so any component can react.
 import type { ToolCall } from "@/lib/tools";
-import { applyTheme } from "@/lib/themes";
 
 export function scrollToSection(section: string) {
   const target = `#${section}`;
@@ -11,15 +10,6 @@ export function scrollToSection(section: string) {
     window.__lenis.scrollTo(el as HTMLElement, { offset: 0, duration: 1.3 });
   } else {
     el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-}
-
-export function setTheme(theme: "dark" | "light") {
-  // Route through the preset system so inline CSS vars stay consistent.
-  if (theme === "light") {
-    applyTheme("light-clean");
-  } else {
-    applyTheme(localStorage.getItem("last-dark-preset") || "aurora");
   }
 }
 
@@ -51,11 +41,6 @@ export function executeToolCall(call: ToolCall) {
     }
     case "download_resume": {
       downloadResume();
-      break;
-    }
-    case "set_theme": {
-      const theme = call.input.theme === "light" ? "light" : "dark";
-      setTheme(theme);
       break;
     }
     default:
