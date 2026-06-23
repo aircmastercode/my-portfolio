@@ -23,7 +23,7 @@ const serif = Instrument_Serif({
   display: "swap",
 });
 
-const url = "https://tanushsinghal.dev";
+const url = "https://tanushsinghal.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(url),

@@ -104,16 +104,12 @@ export default function ActivityGrid({ data }: Props) {
 
       <div ref={gridRef} className="activity-grid-wrap relative overflow-x-auto pb-2">
         <div className="inline-flex min-w-full flex-col gap-1">
-          <div className="flex gap-1 pl-8">
+          <div className="relative h-4">
             {ticks.map((t) => (
               <span
                 key={`${t.label}-${t.weekIndex}`}
-                className="font-mono text-[10px] text-muted"
-                style={{
-                  position: "relative",
-                  left: `${t.weekIndex * 14}px`,
-                  marginRight: t.weekIndex === 0 ? 0 : undefined,
-                }}
+                className="absolute font-mono text-[10px] text-muted"
+                style={{ left: `${32 + t.weekIndex * 14}px` }}
               >
                 {t.label}
               </span>
