@@ -18,6 +18,14 @@ export const profile = {
     github: "https://github.com/aircmastercode",
     medium: "https://medium.com/@tanushsinghal22082004",
   },
+
+  // Handles for the coding activity heatmap (edit if yours differ).
+  codingPlatforms: {
+    github: "aircmastercode",
+    leetcode: "aircmastercode",
+    codeforces: "aircmastercode42",
+  },
+
   intro:
     "Computer Science undergraduate and backend-leaning software engineer who delivers end-to-end. Two engineering internships (USA + Indian Railways) building scalable services on AWS and PostgreSQL, plus a 1st-place hackathon win out of 50+ teams. The focus: production-quality, tested code — then proof it worked with real numbers.",
 
@@ -240,6 +248,80 @@ export const profile = {
       },
     ],
   },
+
+  // Personal timeline — milestones across education, work, projects, and writing.
+  timeline: [
+    {
+      date: "Aug 2023",
+      sortKey: "2023-08",
+      title: "Started at BITS Pilani",
+      subtitle: "B.E. Computer Science Engineering — Pilani Campus",
+      category: "education",
+    },
+    {
+      date: "Aug 2023",
+      sortKey: "2023-08",
+      title: "Enrolled at IIT Madras",
+      subtitle: "B.S. Data Science & Applications (online), pursued alongside BITS",
+      category: "education",
+    },
+    {
+      date: "May 2025",
+      sortKey: "2025-05",
+      title: "CRIS internship begins",
+      subtitle: "Full-stack Parcel Management System for Indian Railways",
+      category: "work",
+    },
+    {
+      date: "Jun 2025",
+      sortKey: "2025-06",
+      title: "1st of 50+ teams — LenDenClub hackathon",
+      subtitle: "Led a 4-member team; shipped a serverless voice AI assistant in 48 hours",
+      category: "milestone",
+    },
+    {
+      date: "Jul 2025",
+      sortKey: "2025-07",
+      title: "Railway PMS shipped",
+      subtitle: "40+ REST APIs, JWT auth, Docker Compose — capacity-planned for 7,000+ stations",
+      category: "project",
+    },
+    {
+      date: "Oct 2025",
+      sortKey: "2025-10",
+      title: "Software Tree internship",
+      subtitle: "Remote SDE intern (USA) — building the Inventory Watchdog agent",
+      category: "work",
+    },
+    {
+      date: "Nov 2025",
+      sortKey: "2025-11",
+      title: "Published Inventory Watchdog essay",
+      subtitle: "Medium architecture deep-dive — why the LLM left the monitoring loop",
+      category: "writing",
+    },
+    {
+      date: "Apr 2026",
+      sortKey: "2026-04",
+      title: "APOGEE 2026 — fraud detection system",
+      subtitle: "Hybrid explainable scoring; AI advises, humans decide",
+      category: "project",
+    },
+    {
+      date: "Apr 2026",
+      sortKey: "2026-04",
+      title: "Published MCP benchmark study",
+      subtitle: "33-minute essay on the hidden tax of AI database access",
+      category: "writing",
+    },
+    {
+      date: "Present",
+      sortKey: "2026-06",
+      title: "Building in public",
+      subtitle: "Shipping agentic backends, benchmarking LLM tooling, open to SDE / AI internships",
+      category: "milestone",
+    },
+  ],
 } as const;
 
 export type Profile = typeof profile;
@@ -250,8 +332,10 @@ export const SECTION_IDS = [
   "hero",
   "about",
   "experience",
+  "timeline",
   "projects",
   "skills",
+  "activity",
   "writing",
   "contact",
 ] as const;

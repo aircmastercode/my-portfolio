@@ -8,8 +8,10 @@ import { toggleMode } from "@/lib/themes";
 const LINKS: { id: string; label: string }[] = [
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
+  { id: "timeline", label: "Timeline" },
   { id: "projects", label: "Work" },
   { id: "skills", label: "Skills" },
+  { id: "activity", label: "Activity" },
   { id: "writing", label: "Writing" },
   { id: "contact", label: "Contact" },
 ];

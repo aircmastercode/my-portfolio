@@ -7,7 +7,7 @@ export default function Skills() {
   return (
     <section id="skills" className="py-28">
       <div className="mx-auto max-w-6xl px-6">
-        <SectionHeading index="05" title="The toolkit" />
+        <SectionHeading index="06" title="The toolkit" />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {profile.skills.map((group, i) => (
             <Reveal key={group.group} delay={i * 70}>

@@ -343,3 +343,100 @@ body::after {
   .marquee-track, .orb-pulse, .aurora-blob { animation: none !important; }
   * { scroll-behavior: auto !important; }
 }
+
+/* ───────────────────────── Activity heatmap ───────────────────────── */
+:root {
+  --activity-github: #3fb950;
+  --activity-leetcode: #e8a838;
+  --activity-codeforces: #5b9bd5;
+  --activity-empty: color-mix(in srgb, var(--fg) 8%, transparent);
+}
+
+.activity-cell {
+  display: block;
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  border: none;
+  padding: 0;
+  background: var(--activity-empty);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: default;
+}
+.activity-cell--pad {
+  pointer-events: none;
+}
+.activity-cell--legend {
+  width: 12px;
+  height: 12px;
+  cursor: default;
+}
+.activity-cell:not(.activity-cell--empty):not(.activity-cell--pad):hover,
+.activity-cell:not(.activity-cell--empty):not(.activity-cell--pad):focus-visible {
+  transform: scale(1.35);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--fg) 30%, transparent);
+  outline: none;
+  z-index: 2;
+}
+
+.activity-cell--l1 { opacity: 0.55; }
+.activity-cell--l2 { opacity: 0.72; }
+.activity-cell--l3 { opacity: 0.88; }
+.activity-cell--l4 { opacity: 1; }
+
+.activity-cell--m1 { background: var(--activity-github); }
+.activity-cell--m2 { background: var(--activity-leetcode); }
+.activity-cell--m4 { background: var(--activity-codeforces); }
+.activity-cell--m3 {
+  background: conic-gradient(var(--activity-github) 0deg 180deg, var(--activity-leetcode) 180deg 360deg);
+}
+.activity-cell--m5 {
+  background: conic-gradient(var(--activity-github) 0deg 180deg, var(--activity-codeforces) 180deg 360deg);
+}
+.activity-cell--m6 {
+  background: conic-gradient(var(--activity-leetcode) 0deg 180deg, var(--activity-codeforces) 180deg 360deg);
+}
+.activity-cell--m7 {
+  background: conic-gradient(
+    var(--activity-github) 0deg 120deg,
+    var(--activity-leetcode) 120deg 240deg,
+    var(--activity-codeforces) 240deg 360deg
+  );
+}
+
+.activity-tooltip {
+  min-width: 180px;
+  max-width: 260px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg-elev) 92%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 40px -16px rgba(0, 0, 0, 0.45);
+}
+
+/* ───────────────────────── Timeline ───────────────────────── */
+.timeline-dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--bg) 80%, transparent);
+}
+.timeline-dot--education { background: #7eb8da; }
+.timeline-dot--work { background: var(--activity-github); }
+.timeline-dot--project { background: var(--activity-leetcode); }
+.timeline-dot--milestone { background: var(--accent-warm); }
+.timeline-dot--writing { background: #c9a0dc; }
+
+.timeline-pill {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 9999px;
+  padding: 0.2rem 0.55rem;
+}

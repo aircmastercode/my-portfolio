@@ -6,7 +6,7 @@ export default function Writing() {
   return (
     <section id="writing" className="mx-auto max-w-6xl px-6 py-28">
       <SectionHeading
-        index="06"
+        index="08"
         title="I write about the trade-offs"
         subtitle="Long-form engineering essays, with companion video and podcast walkthroughs."
       />

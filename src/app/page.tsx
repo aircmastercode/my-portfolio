@@ -11,8 +11,10 @@ import Manifesto from "@/components/sections/Manifesto";
 import About from "@/components/sections/About";
 import Approach from "@/components/sections/Approach";
 import Experience from "@/components/sections/Experience";
+import Timeline from "@/components/sections/Timeline";
 import Projects from "@/components/sections/Projects";
 import Skills from "@/components/sections/Skills";
+import Activity from "@/components/sections/Activity";
 import Writing from "@/components/sections/Writing";
 import Contact from "@/components/sections/Contact";
 import AgentWidget from "@/components/agent/AgentWidget";
@@ -32,8 +34,10 @@ export default function Home() {
         <About />
         <Approach />
         <Experience />
+        <Timeline />
         <Projects />
         <Skills />
+        <Activity />
         <Writing />
         <Contact />
       </main>

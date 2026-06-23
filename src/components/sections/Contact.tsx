@@ -44,7 +44,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="mx-auto max-w-6xl px-6 py-28">
-      <SectionHeading index="07" title="Let's build something" />
+      <SectionHeading index="09" title="Let's build something" />
 
       <Reveal>
         <div className="overflow-hidden rounded-[2rem] border border-line bg-bg-elev/40 p-8 sm:p-14">
