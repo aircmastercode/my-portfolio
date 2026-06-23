@@ -20,6 +20,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [isDark, setIsDark] = useState(true);
+  const [activeId, setActiveId] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -37,6 +38,25 @@ export default function Navbar() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("agent:theme", onTheme);
     };
+  }, []);
+
+  // Track which section is in view so its nav link keeps the active underline.
+  useEffect(() => {
+    const sections = LINKS.map((l) => document.getElementById(l.id)).filter(
+      (el): el is HTMLElement => el !== null
+    );
+    if (sections.length === 0) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) setActiveId(visible[0].target.id);
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 1] }
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
   }, []);
 
   const go = (id: string) => {
@@ -70,7 +90,9 @@ export default function Navbar() {
               <button
                 onClick={() => go(l.id)}
                 data-hover
-                className="rounded-full px-3 py-1.5 text-sm text-muted transition-colors hover:text-fg"
+                className={`nav-link rounded-full px-3 py-1.5 text-sm text-muted hover:text-fg ${
+                  activeId === l.id ? "is-active" : ""
+                }`}
               >
                 {l.label}
               </button>
@@ -90,7 +112,7 @@ export default function Navbar() {
           <button
             onClick={() => window.dispatchEvent(new CustomEvent("agent:open"))}
             data-hover
-            className="hidden rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-contrast)] transition-transform hover:scale-105 sm:inline-flex"
+            className="hidden rounded-full border border-[rgba(205,191,166,0.6)] bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-contrast)] transition-all hover:scale-105 hover:shadow-[0_0_16px_rgba(205,191,166,0.3)] sm:inline-flex"
           >
             Talk to me
           </button>

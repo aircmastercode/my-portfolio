@@ -14,8 +14,8 @@ export type ThemeVars = {
 };
 
 export const REFINED_DARK: ThemeVars = {
-  "--bg": "#0b0a09",
-  "--bg-elev": "#16140f",
+  "--bg": "#000000",
+  "--bg-elev": "#0c0b0a",
   "--fg": "#ece6db",
   "--muted": "#968d7e",
   "--line": "rgba(236,230,219,0.1)",

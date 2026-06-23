@@ -2,9 +2,9 @@
 
 /* ───────────────────────── Design tokens ───────────────────────── */
 :root {
-  /* Quiet-luxury dark — warm layered neutrals, richness from craft not color. */
-  --bg: #0b0a09;
-  --bg-elev: #16140f;
+  /* Quiet-luxury dark — pure-black base with warm neutral accents. */
+  --bg: #000000;
+  --bg-elev: #0c0b0a;
   --fg: #ece6db;
   --muted: #968d7e;
   --line: rgba(236, 230, 219, 0.1);
@@ -53,7 +53,7 @@ html {
 }
 
 body {
-  background: var(--bg);
+  background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99, 102, 241, 0.07) 0%, transparent 60%), var(--bg);
   color: var(--fg);
   font-family: var(--font-sans), system-ui, sans-serif;
   overflow-x: hidden;
@@ -151,6 +151,34 @@ body::after {
   transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--accent) 45%, transparent);
   box-shadow: 0 18px 50px -20px var(--glow);
+}
+
+/* Selected work cards — indigo accent border + hover glow (scoped to section 05) */
+.work-card {
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  transition: all 0.25s ease;
+}
+.work-card:hover {
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.08);
+}
+
+/* Navbar links — golden pill border on hover and for the active section */
+.nav-link {
+  border: 1.5px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.nav-link:hover,
+.nav-link.is-active {
+  border-color: var(--accent-2);
+}
+
+/* Hero stat values — indigo gradient text (numbers only, not labels) */
+.stat-gradient {
+  background: linear-gradient(135deg, #a5b4fc, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Gradient primary button (multi-hue, not flat) */

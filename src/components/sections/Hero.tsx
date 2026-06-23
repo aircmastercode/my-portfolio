@@ -99,7 +99,7 @@ export default function Hero() {
                 <div key={s.label} className="min-w-[78px]">
                   <CountUp
                     value={s.value}
-                    className="font-display text-2xl font-light leading-none text-gradient sm:text-3xl"
+                    className="font-display text-2xl font-light leading-none stat-gradient sm:text-3xl"
                   />
                   <div className="mt-1 text-[11px] leading-tight text-muted">{s.label}</div>
                 </div>

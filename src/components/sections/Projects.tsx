@@ -39,7 +39,7 @@ export default function Projects() {
             <button
               onClick={() => setActive(p)}
               data-hover
-              className="glass-card group flex h-full w-full flex-col p-6 text-left"
+              className="glass-card work-card group flex h-full w-full flex-col p-6 text-left"
             >
               <div className="flex items-center justify-between">
                 <span className="rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-3 py-1 font-mono text-[11px] text-[var(--accent)]">

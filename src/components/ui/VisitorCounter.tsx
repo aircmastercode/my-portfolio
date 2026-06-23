@@ -21,7 +21,7 @@ export default function VisitorCounter({ variant = "inline", className = "" }: P
       <div className={`min-w-[92px] ${className}`}>
         <CountUp
           value={unique}
-          className="font-display text-2xl font-light leading-none text-gradient sm:text-3xl"
+          className="font-display text-2xl font-light leading-none stat-gradient sm:text-3xl"
         />
         <div className="mt-1 text-[11px] leading-tight text-muted">profile viewers</div>
       </div>
