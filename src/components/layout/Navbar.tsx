@@ -23,7 +23,14 @@ export default function Navbar() {
   const [activeId, setActiveId] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 40);
+        raf = 0;
+      });
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
@@ -37,6 +44,7 @@ export default function Navbar() {
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("agent:theme", onTheme);
+      if (raf) cancelAnimationFrame(raf);
     };
   }, []);
 

@@ -14,17 +14,32 @@ export default function CustomCursor() {
 
     let rx = 0, ry = 0, dx = 0, dy = 0;
     let raf = 0;
+    let running = false;
 
-    const move = (e: MouseEvent) => {
-      dx = e.clientX;
-      dy = e.clientY;
-      d.style.transform = `translate(${dx - 3}px, ${dy - 3}px)`;
-    };
+    // The trailing ring only animates while it's catching up to the cursor.
+    // Once it settles we stop the rAF loop entirely — no perpetual 60fps work.
     const loop = () => {
       rx += (dx - rx) * 0.18;
       ry += (dy - ry) * 0.18;
-      r.style.transform = `translate(${rx - 17}px, ${ry - 17}px)`;
+      r.style.transform = `translate3d(${rx - 17}px, ${ry - 17}px, 0)`;
+      if (Math.abs(dx - rx) + Math.abs(dy - ry) < 0.5) {
+        running = false;
+        raf = 0;
+        return;
+      }
       raf = requestAnimationFrame(loop);
+    };
+    const start = () => {
+      if (!running) {
+        running = true;
+        raf = requestAnimationFrame(loop);
+      }
+    };
+    const move = (e: MouseEvent) => {
+      dx = e.clientX;
+      dy = e.clientY;
+      d.style.transform = `translate3d(${dx - 3}px, ${dy - 3}px, 0)`;
+      start();
     };
     const over = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
@@ -32,13 +47,12 @@ export default function CustomCursor() {
       else r.classList.remove("is-hover");
     };
 
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mouseover", over);
-    raf = requestAnimationFrame(loop);
+    window.addEventListener("mousemove", move, { passive: true });
+    window.addEventListener("mouseover", over, { passive: true });
     return () => {
       window.removeEventListener("mousemove", move);
       window.removeEventListener("mouseover", over);
-      cancelAnimationFrame(raf);
+      if (raf) cancelAnimationFrame(raf);
     };
   }, []);
 

@@ -70,7 +70,9 @@ body::before {
   background: radial-gradient(130% 90% at 50% 110%, transparent 55%, rgba(0, 0, 0, 0.45));
 }
 
-/* Film grain overlay for analog richness */
+/* Film grain overlay for analog richness.
+   Promoted to its own GPU layer so it only re-composites (cheap) instead of
+   repainting on every scroll frame — same look, no scroll jank. */
 body::after {
   content: "";
   position: fixed;
@@ -80,6 +82,9 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
   opacity: 0.05;
   mix-blend-mode: overlay;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: strict;
 }
 
 /* ───────────────────────── Utilities ───────────────────────── */
@@ -222,12 +227,16 @@ body::after {
     0 8px 40px -8px var(--glow);
 }
 
-/* Reveal-on-scroll base state (GSAP toggles .is-in) */
+/* Reveal-on-scroll base state (GSAP toggles .is-in).
+   `will-change` is applied ONLY before reveal, then dropped once `.is-in` lands,
+   so we never keep dozens of permanent compositor layers alive (big memory win). */
 .reveal {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal:not(.is-in) {
   will-change: opacity, transform;
 }
 .reveal.is-in {
