@@ -46,6 +46,38 @@ export default function Experience() {
                 </span>
               ))}
             </div>
+
+            {(() => {
+              const review = profile.testimonials.find((t) => t.company === exp.company);
+              const cert = profile.certificates.find((c) => c.company === exp.company);
+              if (!review && !cert) return null;
+              return (
+                <div className="mt-5 space-y-3">
+                  {review && (
+                    <figure className="rounded-2xl border border-line bg-bg-elev/40 p-4">
+                      <blockquote className="text-sm italic leading-relaxed text-fg/85">
+                        “{review.quote}”
+                      </blockquote>
+                      <figcaption className="mt-2 font-mono text-[11px] uppercase tracking-widest text-[var(--accent-2)]">
+                        {review.name} · {review.relationship}
+                      </figcaption>
+                    </figure>
+                  )}
+                  {cert && (
+                    <a
+                      href={cert.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-hover
+                      className="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--accent)] hover:underline"
+                    >
+                      View certificate
+                      <span aria-hidden>↗</span>
+                    </a>
+                  )}
+                </div>
+              );
+            })()}
           </Reveal>
         ))}
       </div>

@@ -9,7 +9,7 @@ export const profile = {
   triple: ["Builder", "Measurer", "Finisher"],
   location: "Ghaziabad, India",
   availability: "Open to SDE / AI engineering internships · willing to relocate",
-  email: "f20230586@pilani.bits-pilani.ac.in",
+  email: "its.tanush.hq@gmail.com",
   phone: "+91-9650350920",
   resumeUrl: "/resume.pdf",
   calLink: process.env.NEXT_PUBLIC_CAL_LINK || "tanushsinghal/30min",
@@ -322,6 +322,31 @@ export const profile = {
       category: "milestone",
     },
   ],
+
+  // What people say. `company` matches an experience.company exactly so the
+  // quote also surfaces inline under that role in the Experience section.
+  testimonials: [
+    {
+      quote:
+        "Your work during the internship has been exceptional — not just technically strong, but also thoughtful, reliable, and mature in execution. The contributions you made around ORMCP, Gilhari, JDX, LLM systems, and agent workflows stood out, and several times you operated well beyond what I'd normally expect from an intern. Your work on the Inventory Watchdog project, the related YouTube video and podcast, and the benchmark article have been outstanding. More importantly, you approached problems with curiosity, ownership, and a strong learning mindset, which has made working with you a pleasure. I genuinely believe you have a very strong profile for roles in GenAI, backend infrastructure, AI systems engineering, and intelligent usage of AI tools, and I'm confident you'll do very well wherever you go next. You've made a real impact here.",
+      name: "Damodar Periwal",
+      role: "Founder, Software Tree",
+      company: "Software Tree, LLC",
+      relationship: "Internship manager · USA",
+    },
+  ],
+
+  // Certificates & credentials. To add one: drop the image/PDF in
+  // `public/certificates/` and add an entry: { title, issuer, date, href, company }.
+  // `company` (optional) links a certificate to an experience so a
+  // "View certificate" link appears inline on that role.
+  certificates: [] as {
+    title: string;
+    issuer: string;
+    date: string;
+    href: string;
+    company: string;
+  }[],
 } as const;
 
 export type Profile = typeof profile;
@@ -337,6 +362,7 @@ export const SECTION_IDS = [
   "skills",
   "activity",
   "writing",
+  "testimonials",
   "contact",
 ] as const;
 export type SectionId = (typeof SECTION_IDS)[number];

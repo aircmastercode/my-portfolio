@@ -16,6 +16,7 @@ import Projects from "@/components/sections/Projects";
 import Skills from "@/components/sections/Skills";
 import Activity from "@/components/sections/Activity";
 import Writing from "@/components/sections/Writing";
+import Testimonials from "@/components/sections/Testimonials";
 import Contact from "@/components/sections/Contact";
 import AgentWidget from "@/components/agent/AgentWidget";
 
@@ -39,6 +40,7 @@ export default function Home() {
         <Skills />
         <Activity />
         <Writing />
+        <Testimonials />
         <Contact />
       </main>
       <Footer />

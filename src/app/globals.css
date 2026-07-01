@@ -282,6 +282,14 @@ body::after {
   height: 56px;
   background: rgba(255, 255, 255, 0.12);
 }
+/* Only show the custom cursor on devices that actually have a pointer.
+   On touch/mobile (no hover) it's hidden entirely so nothing floats around. */
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+}
 
 /* Voice orb pulse */
 @keyframes orb-pulse {

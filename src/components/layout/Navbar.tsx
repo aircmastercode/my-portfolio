@@ -13,6 +13,7 @@ const LINKS: { id: string; label: string }[] = [
   { id: "skills", label: "Skills" },
   { id: "activity", label: "Activity" },
   { id: "writing", label: "Writing" },
+  { id: "testimonials", label: "Praise" },
   { id: "contact", label: "Contact" },
 ];
 
